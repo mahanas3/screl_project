@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:screl_project/custom_widget/custom_button.dart';
 import 'package:screl_project/provider/homepage_provider.dart';
 
-import '../provider/homepage_provider.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var HomepageProvider = Provider.of<HomePageProvider>(context);
+    context.read<HomePageProvider>().addFruit('fruit');
   }
 
   List fruitsname = ['apple', 'mango', 'orange', 'grape', 'banana'];

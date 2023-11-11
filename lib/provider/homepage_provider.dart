@@ -8,8 +8,6 @@ class HomePageProvider extends ChangeNotifier{
   List<String> get fruits => _fruits;
 
   void addFruit(String fruit) {
-
-
     _fruits.add(fruit);
     notifyListeners();
   }
