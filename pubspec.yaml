@@ -39,6 +39,8 @@ dependencies:
   freezed: ^2.4.5
   freezed_annotation:
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

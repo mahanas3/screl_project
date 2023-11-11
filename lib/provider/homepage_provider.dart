@@ -1,28 +1,34 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../model_class/fruit_model.dart';
+import '../model_class/todo_model.dart';
 
 class HomePageProvider extends ChangeNotifier {
-  List<Fruit> _fruits = [
-    Fruit(name: 'apple'),
-    Fruit(name: 'mango'),
-    Fruit(name: 'orange'),
-    Fruit(name: 'grape'),
-    Fruit(name: 'banana'),
+  List<Todo> _todo = [
   ];
 
   bool loading = false;
 
-  List<Fruit> get fruits => _fruits;
+  List<Todo> get todo => _todo;
 
-  void addFruit(String fruitName) {
-    _fruits.add(Fruit(name: fruitName));
-    notifyListeners();
-  }
-  void deleteFruit(int index) {
-    if (index >= 0 && index < _fruits.length) {
-      _fruits.removeAt(index);
+  void addFruit(String fruitName,BuildContext context) {
+    try {
+      _todo.add(Todo(name: fruitName));
       notifyListeners();
+    }catch(e){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+      print(e);
     }
   }
+  void deleteFruit(int index,BuildContext context) {
+    try{
+    if (index >= 0 && index < _todo.length) {
+      _todo.removeAt(index);
+      notifyListeners();
+    }
+  }catch(e){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+      print(e);
+    }}
 }

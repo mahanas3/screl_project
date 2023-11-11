@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:screl_project/provider/homepage_provider.dart';
 import 'package:screl_project/routes/route_navigation.dart';
 
-void main() {
+void main() async {
   runApp(ChangeNotifierProvider(
     create: (context) => HomePageProvider(),
     child: const Main(),

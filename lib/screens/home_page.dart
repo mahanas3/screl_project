@@ -19,11 +19,9 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
-      context.read<HomePageProvider>().addFruit('fruit');
+      context.read<HomePageProvider>().addFruit('Mahanas', context);
     });
   }
-
-  List fruitsname = ['apple', 'mango', 'orange', 'grape', 'banana'];
 
   @override
   Widget build(BuildContext context) {
@@ -39,36 +37,42 @@ class _HomePageState extends State<HomePage> {
             )),
         body: Consumer<HomePageProvider>(
             builder: (BuildContext context, value, Widget? child) {
-          return ListView.builder(
-            itemCount: value.fruits.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: Dimensions.heightCalc(context, 70),
-                child: Card(
-                  shadowColor: Constant.accentColor,
-                  elevation: 0.5,
-                  color: Constant.accentColor,
-                  child: Row(
-                    children: [
-                      Text(value.fruits[index]!.name!,
-                          style: const TextStyle(color: Constant.textColor)),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      CustomButtonWidget(
-                          onPressed: () {
-                            value.addFruit('New Fruit');
-                          },
-                          buttonText: 'Add'),
-                      CustomDeleteButton(onPressed: () {
-                        value.deleteFruit(index);
-                      })
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+          return value.loading
+              ? const CircularProgressIndicator()
+              : value.todo == null
+                  ? const Text('Loading..')
+                  : ListView.builder(
+                      itemCount: value.todo.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            Card(
+                              shadowColor: Constant.accentColor,
+                              elevation: 0.5,
+                              color: Constant.accentColor,
+                              child: Container(
+                                height: Dimensions.heightCalc(context, 40),
+                                width: Dimensions.widthCalc(context, 80),
+                                child: Text(value.todo[index]!.name!,
+                                    style: const TextStyle(
+                                        color: Constant.textColor)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            CustomButtonWidget(
+                                onPressed: () {
+                                  value.addFruit('New Todo', context);
+                                },
+                                buttonText: 'Add'),
+                            CustomDeleteButton(onPressed: () {
+                              value.deleteFruit(index, context);
+                            })
+                          ],
+                        );
+                      },
+                    );
         }));
   }
 }
