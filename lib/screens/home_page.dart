@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screl_project/custom_widget/custom_button.dart';
+import 'package:screl_project/custom_widget/customdelete_button.dart';
 import 'package:screl_project/provider/homepage_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<HomePageProvider>().addFruit('fruit');
+    Future.delayed(Duration.zero, () {
+      context.read<HomePageProvider>().addFruit('fruit');
+    });
   }
 
   List fruitsname = ['apple', 'mango', 'orange', 'grape', 'banana'];
@@ -32,27 +35,38 @@ class _HomePageState extends State<HomePage> {
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
             )),
-        body: ListView.builder(
-          itemCount: fruitsname.length,
-          itemBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              height: 70,
-              child: Card(
-                shadowColor: Colors.black87,
-                elevation: 0.5,
-                color: Colors.black,
-                child: Row(
-                  children: [
-                    const Text('', style: TextStyle(color: Colors.white)),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    CustomButtonWidget(onPressed: () {}, buttonText: 'Add')
-                  ],
+        body: Consumer<HomePageProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+          return ListView.builder(
+            itemCount: value.fruits.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: 70,
+                child: Card(
+                  shadowColor: Colors.black87,
+                  elevation: 0.5,
+                  color: Colors.black,
+                  child: Row(
+                    children: [
+                      Text(value.fruits[index]!.name!,
+                          style: const TextStyle(color: Colors.white)),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      CustomButtonWidget(
+                          onPressed: () {
+                            value.addFruit('New Fruit');
+                          },
+                          buttonText: 'Add'),
+                      CustomDeleteButton(onPressed: () {
+                        value.deleteFruit(index);
+                      })
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-        ));
+              );
+            },
+          );
+        }));
   }
 }
