@@ -7,12 +7,12 @@ class Approute {
     switch (settings.name) {
       case RouteName.homepage:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const HomePage(),
         );
       default:
         {
           return MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const HomePage(),
           );
         }
     }
