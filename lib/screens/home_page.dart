@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration.zero, () {
-      context.read<HomePageProvider>().addFruit('Mahanas', context);
+      context.read<HomePageProvider>().addTodo('Mahanas', context);
     });
   }
 
@@ -63,11 +63,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             CustomButtonWidget(
                                 onPressed: () {
-                                  value.addFruit('New Todo', context);
+                                  value.addTodo('New Todo', context);
                                 },
                                 buttonText: 'Add'),
                             CustomDeleteButton(onPressed: () {
-                              value.deleteFruit(index, context);
+                              value.deleteTodo(index, context);
                             })
                           ],
                         );
