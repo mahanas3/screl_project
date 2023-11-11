@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:screl_project/utilities/constant.dart';
 
 class CustomDeleteButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -10,7 +11,7 @@ class CustomDeleteButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(
         Icons.delete,
-        color: Colors.red,
+        color: Constant.deleteButtonColor,
       ),
       onPressed: onPressed,
     );

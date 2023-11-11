@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:screl_project/custom_widget/custom_button.dart';
 import 'package:screl_project/custom_widget/customdelete_button.dart';
 import 'package:screl_project/provider/homepage_provider.dart';
+import 'package:screl_project/utilities/constant.dart';
+import 'package:screl_project/utilities/dimensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.black87,
+            backgroundColor: Constant.primaryColor,
             title: const Center(
               child: Text(
                 "Todo-List",
@@ -41,15 +43,15 @@ class _HomePageState extends State<HomePage> {
             itemCount: value.fruits.length,
             itemBuilder: (BuildContext context, int index) {
               return SizedBox(
-                height: 70,
+                height: Dimensions.heightCalc(context, 70),
                 child: Card(
-                  shadowColor: Colors.black87,
+                  shadowColor: Constant.accentColor,
                   elevation: 0.5,
-                  color: Colors.black,
+                  color: Constant.accentColor,
                   child: Row(
                     children: [
                       Text(value.fruits[index]!.name!,
-                          style: const TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: Constant.textColor)),
                       const SizedBox(
                         width: 20,
                       ),
